@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="8" alignment="CENTER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.controller.StatisticsController" prefWidth="400" prefHeight="250">
+    <Label text="Statistics" style="-fx-font-size:18px; -fx-font-weight:bold;"/>
+    <GridPane hgap="8" vgap="8">
+        <Label text="Played:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Label fx:id="lblPlayed" text="0" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Wins:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <Label fx:id="lblWins" text="0" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Losses:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <Label fx:id="lblLosses" text="0" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Draws:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <Label fx:id="lblDraws" text="0" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    </GridPane>
+    <Button text="Back" onAction="#onBack"/>
+</VBox>

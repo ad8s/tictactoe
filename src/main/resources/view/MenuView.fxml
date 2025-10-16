@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.controller.MenuController" prefWidth="400" prefHeight="250">
+    <Label text="Main Menu" style="-fx-font-size:20px; -fx-font-weight:bold;"/>
+    <Button text="New Game" onAction="#onNewGame"/>
+    <Button text="Statistics" onAction="#onStatistics"/>
+    <Button text="Logout" onAction="#onLogout"/>
+</VBox>

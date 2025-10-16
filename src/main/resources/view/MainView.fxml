@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.controller.MainViewController" prefWidth="400" prefHeight="200">
+    <Label text="Tic-Tac-Toe" style="-fx-font-size:24px; -fx-font-weight:bold;"/>
+    <Button text="Login / Create User" onAction="#onOpenLogin" />
+    <Button text="Exit" onAction="#onExit" />
+</VBox>
