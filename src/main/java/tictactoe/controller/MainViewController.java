@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import tictactoe.service.StorageService;
 
 /**
  * Controller for the initial/main view that can navigate to login or exit.
@@ -14,9 +15,17 @@ import java.io.IOException;
 public class MainViewController {
 
     private Stage stage;
+    private StorageService storageService;
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    /**
+     * Injects the storage service.
+     */
+    public void setStorageService(StorageService storageService) {
+        this.storageService = storageService;
     }
 
     @FXML
@@ -42,8 +51,14 @@ public class MainViewController {
             Parent root = loader.load();
 
             Object controller = loader.getController();
-            if (controller instanceof LoginController)
+            if (controller instanceof LoginController) {
                 ((LoginController) controller).setStage(stage);
+                ((LoginController) controller).setStorageService(storageService);
+            }
+            if (controller instanceof MenuController) {
+                ((MenuController) controller).setStage(stage);
+                ((MenuController) controller).setStorageService(storageService);
+            }
 
             stage.setScene(new Scene(root));
             stage.show();

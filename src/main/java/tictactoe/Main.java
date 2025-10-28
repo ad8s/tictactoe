@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import tictactoe.controller.MainViewController;
+import tictactoe.service.StorageService;
 
 public class Main extends Application {
 
@@ -15,6 +16,8 @@ public class Main extends Application {
         Parent root = loader.load();
         MainViewController ctrl = loader.getController();
         ctrl.setStage(primaryStage);
+        StorageService storageService = new StorageService();
+        ctrl.setStorageService(storageService);
 
         primaryStage.setTitle("Tic-Tac-Toe");
         primaryStage.setScene(new Scene(root));

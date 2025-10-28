@@ -4,7 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import tictactoe.model.Player;
+import tictactoe.service.StorageService;
 
+/**
+ * Controller that displays player statistics.
+ */
 public class StatisticsController {
 
     @FXML
@@ -18,6 +22,7 @@ public class StatisticsController {
 
     private Stage stage;
     private Player player;
+    private StorageService storageService;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -26,6 +31,13 @@ public class StatisticsController {
     public void setPlayer(Player player) {
         this.player = player;
         loadStats();
+    }
+
+    /**
+     * Injects the storage service.
+     */
+    public void setStorageService(StorageService storageService) {
+        this.storageService = storageService;
     }
 
     private void loadStats() {
@@ -44,6 +56,7 @@ public class StatisticsController {
             MenuController ctrl = loader.getController();
             ctrl.setStage(stage);
             ctrl.setPlayer(player);
+            ctrl.setStorageService(storageService);
             stage.setScene(new javafx.scene.Scene(root));
             stage.show();
         } catch (Exception e) {

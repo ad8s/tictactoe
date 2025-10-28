@@ -7,11 +7,10 @@ import javafx.stage.Stage;
 import tictactoe.model.Game;
 import tictactoe.model.Match;
 import tictactoe.model.Player;
-import tictactoe.model.FileManager;
+import tictactoe.service.StorageService;
 
 /**
- * Controller for the game board. Buttons are named btn00, btn01, ... btn22
- * matching row/col.
+ * Controller for the game board.
  */
 public class GameController {
 
@@ -40,13 +39,25 @@ public class GameController {
     private Stage stage;
     private Player player;
     private Game game;
+    private StorageService storageService;
 
-    private FileManager fileManager = new FileManager();
-
+    /**
+     * Sets the application stage.
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Injects the storage service.
+     */
+    public void setStorageService(StorageService storageService) {
+        this.storageService = storageService;
+    }
+
+    /**
+     * Starts a new game for the specified player.
+     */
     public void startNewGame(Player player) {
         this.player = player;
         this.game = new Game(player);
@@ -139,14 +150,14 @@ public class GameController {
     }
 
     private void finishGame(Match.Result result) {
-        fileManager.savePlayer(player);
+        storageService.savePlayer(player);
         Match match = new Match(player.getUsername(), result);
-        fileManager.appendMatchToHistory(match);
+        storageService.appendMatchToHistory(match);
     }
 
     @FXML
     private void onBackToMenu() {
-        fileManager.savePlayer(player);
+        storageService.savePlayer(player);
         try {
             javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(
                     getClass().getResource("/view/MenuView.fxml"));
@@ -154,6 +165,7 @@ public class GameController {
             MenuController ctrl = loader.getController();
             ctrl.setStage(stage);
             ctrl.setPlayer(player);
+            ctrl.setStorageService(storageService);
             stage.setScene(new javafx.scene.Scene(root));
             stage.show();
         } catch (Exception e) {

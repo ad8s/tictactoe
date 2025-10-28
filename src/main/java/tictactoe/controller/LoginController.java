@@ -7,14 +7,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import tictactoe.model.FileManager;
 import tictactoe.model.Player;
+import tictactoe.service.StorageService;
 import tictactoe.utils.Helpers;
 
 import java.io.IOException;
 
 /**
- * Login screen: loads or creates a player file data/<username>.dat
+ * Controller for the login screen. Responsible for authenticating or creating a
+ * player.
  */
 public class LoginController {
 
@@ -24,10 +25,20 @@ public class LoginController {
     private PasswordField txtPassword;
 
     private Stage stage;
-    private FileManager fileManager = new FileManager();
+    private StorageService storageService;
 
+    /**
+     * Sets the application stage.
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    /**
+     * Injects the storage service.
+     */
+    public void setStorageService(StorageService storageService) {
+        this.storageService = storageService;
     }
 
     @FXML
@@ -40,12 +51,13 @@ public class LoginController {
             return;
         }
 
-        Player p = fileManager.loadPlayer(username);
+        Player p = storageService.loadPlayer(username);
         if (p == null) {
             p = new Player(username, password);
-            boolean ok = fileManager.savePlayer(p);
-            if (!ok)
+            boolean ok = storageService.savePlayer(p);
+            if (!ok) {
                 Helpers.showError("File error", "Could not create user file.");
+            }
         } else {
             if (!p.getPassword().equals(password)) {
                 Helpers.showError("Login error", "Incorrect password.");
@@ -60,6 +72,7 @@ public class LoginController {
             MenuController ctrl = loader.getController();
             ctrl.setStage(stage);
             ctrl.setPlayer(p);
+            ctrl.setStorageService(storageService);
 
             stage.setScene(new Scene(root));
             stage.show();

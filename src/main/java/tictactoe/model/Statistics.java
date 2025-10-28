@@ -43,4 +43,26 @@ public class Statistics implements Serializable {
     public int getDraws() {
         return draws;
     }
+
+    /**
+     * Set the wins counter and update played accordingly.
+     */
+    public void setWins(int wins) {
+        this.wins = wins;
+        recalcPlayed();
+    }
+
+    public void setLosses(int losses) {
+        this.losses = losses;
+        recalcPlayed();
+    }
+
+    public void setDraws(int draws) {
+        this.draws = draws;
+        recalcPlayed();
+    }
+
+    private void recalcPlayed() {
+        this.played = this.wins + this.losses + this.draws;
+    }
 }

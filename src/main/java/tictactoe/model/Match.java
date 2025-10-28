@@ -23,6 +23,15 @@ public class Match implements Serializable {
         this.dateTime = LocalDateTime.now();
     }
 
+    /**
+     * Create a match with an explicit date/time (used when loading history).
+     */
+    public Match(String playerUsername, Result result, LocalDateTime dateTime) {
+        this.playerUsername = playerUsername;
+        this.result = result;
+        this.dateTime = dateTime;
+    }
+
     public String getPlayerUsername() {
         return playerUsername;
     }
